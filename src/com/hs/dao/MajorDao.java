@@ -7,4 +7,5 @@ import com.hs.model.Major;
 
 public interface MajorDao {
 	public List<Major> getMajorList() throws SQLException;
+	public List<Major> getMajorByList(String name) throws SQLException;
 }

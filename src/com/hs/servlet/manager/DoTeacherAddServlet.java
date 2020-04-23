@@ -1,4 +1,4 @@
-package com.hs.servlet.teacher;
+package com.hs.servlet.manager;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,45 +7,45 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
-
-import com.hs.service.PaperService;
-import com.hs.service.Impl.PaperServiceImpl;
-import com.hs.util.Page;
+import com.hs.service.TeacherService;
+import com.hs.service.Impl.TeacherServiceImpl;
 
 /**
- * 跳转到试卷列表
+ * Servlet implementation class DoTeacherAddServlet
  */
-@WebServlet("/teacher/PaperServlet")
-public class PaperServlet extends HttpServlet {
+@WebServlet("/DoTeacherAddServlet")
+public class DoTeacherAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public DoTeacherAddServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String curPage = request.getParameter("curPage");
-		if(StringUtils.isBlank(curPage)) {
-			curPage="1";
-		}
-		//获取分页对象
-		Page page = (Page) request.getAttribute("page");
-		if(page == null) {
-			page = new Page();
-		}
-		//获取查询关键字
+		//获取请求参数
 		String name = request.getParameter("name");
-		//查询年级列表
-		PaperService ps = new PaperServiceImpl();
-		page = ps.getPaperByName(name,Integer.parseInt(curPage));
-		request.setAttribute("page", page);
-		request.getRequestDispatcher("/WEB-INF/page/teacher/paper_index.jsp").forward(request, response);
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		//调用service层方法
+		TeacherService tea = new TeacherServiceImpl();
+		String result = tea.saveTeacherByName(name,username,password);
+		//结果返回给页面
+		response.getWriter().write(result);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

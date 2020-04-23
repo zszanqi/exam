@@ -13,4 +13,5 @@ public interface ClazzDao {
 	public int deleteClazzById(String ClazzId) throws SQLException;
 	public int saveClazz(String gradeId,String majorId,String cno) throws SQLException;
 	public Clazz getClazzByGidAndMajAndCno(String gradeId,String majorId,String cno) throws SQLException;
+	public List<Clazz> getClazzByGradeIdAndMajorId(int gradeId, int majorId) throws SQLException;
 }

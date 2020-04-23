@@ -81,4 +81,12 @@ public class ClazzDaoImpl implements ClazzDao {
 		return qr.query(sql, new BeanHandler<Clazz>(Clazz.class));
 	}
 
+	//根据年级和专业id获取班级列表
+	@Override
+	public List<Clazz> getClazzByGradeIdAndMajorId(int gradeId, int majorId) throws SQLException {
+		String sql = "select * from clazz where fk_grade="+gradeId+" and fk_major="+majorId
+				+" and del_flag=0";
+		return qr.query(sql, new BeanListHandler<Clazz>(Clazz.class));
+	}
+
 }

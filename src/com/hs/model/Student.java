@@ -47,15 +47,24 @@ public class Student {
         this.realname = realname == null ? null : realname.trim();
     }
 
-    public Integer getFkClazz() {
-        return fk_clazz;
-    }
+   
+    public Integer getFk_clazz() {
+		return fk_clazz;
+	}
 
-    public void setFkClazz(Integer fk_clazz) {
-        this.fk_clazz = fk_clazz;
-    }
+	public void setFk_clazz(Integer fk_clazz) {
+		this.fk_clazz = fk_clazz;
+	}
 
-    public Byte getModified() {
+	public Byte getDel_flag() {
+		return del_flag;
+	}
+
+	public void setDel_flag(Byte del_flag) {
+		this.del_flag = del_flag;
+	}
+
+	public Byte getModified() {
         return modified;
     }
 

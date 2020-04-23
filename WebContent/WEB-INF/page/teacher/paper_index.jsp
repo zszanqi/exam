@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>年级管理</title>
+<title>试卷列表</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,7 +19,7 @@
   			line-height:6px;
   			padding-top:3px;
   			padding-left:10px;
-  			width:50px;
+  			width:auto;
   		}
   	</style>
 </head>
@@ -27,18 +27,18 @@
 	<main class="app-content">
 	  <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> 年级管理</h1>
+          <h1><i class="fa fa-th-list"></i> 试卷管理</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item active"><a href="#" >年级管理</a></li>
+          <li class="breadcrumb-item active"><a href="#" >试卷管理</a></li>
         </ul>
       </div>
 	 <div class="row">
       	<div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-              <form class="row" method="post" action="${basePath }manager/GradeServlet">
+              <form class="row" method="post" action="${basePath }teacher/PaperServlet">
                 <div class="form-group col-md-3">
                   <label class="control-label">查询</label>
                   <input class="form-control" name="name" type="text" value="${name }" placeholder="请输入试卷名称">
@@ -55,30 +55,60 @@
 	  <div class="row">
         <div class="col-md-12">
           <div class="tile">
-            <h3 class="tile-title">年级列表</h3>
+            <h3 class="tile-title">试卷列表</h3>
             <table class="table table-hover">
               <thead align="center">
                 <tr>
                   <th>序号</th>
-                  <th>年级名称</th>
+                  <th>标题</th>
+                  <th>适用班级</th>
+                  <th>时间</th>
+                  <th>状态</th>
+                  <th>状态切换</th>
                   <th>操作</th>
                 </tr>
               </thead>
               <tbody align="center">
-              	<c:forEach items="${page.data }" var="grade" varStatus="status">
-              		<tr id="tr${grade.id }">
-	                  <td>${status.count }</td>
-	                  <td>${grade.name }</td>
+              	<c:forEach items="${page.data }" var="paper" varStatus="status">
+              		<tr id="tr${paper.id }">
+	                  <td>${paper.id }</td>
+	                  <td>${paper.title }</td>
+	                  <td>
+	                  	<button class="btn btn-info my_del" type="button" onclick="deletePaper('${grade.id }')">显示</button>
+	                  </td>
+	                  <td>${paper.time_limit }</td>
+	                  <td>
+							<c:if test="${paper.fk_status == 1 }">
+	                  			未开始
+	                  		</c:if>
+	                  		<c:if test="${paper.fk_status == 2 }">
+	                  			运行结束<a href="#">成绩统计</a>
+	                  		</c:if>
+	                  		<c:if test="${paper.fk_status == 3 }">
+	                  			正在运行
+	                  		</c:if>
+						</td>
+	                  <td>
+	                  		<c:if test="${paper.fk_status == 1 }">
+	                  			<button class="btn btn-primary my_del" type="button">开始运行</button>
+	                  		</c:if>
+	                  		<c:if test="${paper.fk_status == 2 }">
+	                  			<button class="btn btn-success my_del" type="button">重新运行</button>
+	                  		</c:if>
+	                  		<c:if test="${paper.fk_status == 3 }">
+	                  			<button class="btn btn-danger my_del" type="button">立即停止</button>
+	                  		</c:if>
+	                  </td>
 	                  <td>
 	                  	<button class="btn btn-danger my_del" type="button" onclick="deletePaper('${grade.id }')">删除</button>
-	                  	<button class="btn btn-danger my_del" type="button" onclick="">编辑</button>
-	                  	<button class="btn btn-danger my_del" type="button" onclick="">试题</button>
+	                  	<button class="btn btn-primary my_del" type="button" onclick="">编辑</button>
+	                  	<button class="btn btn-info my_del" type="button" onclick="">试题</button>
 	                  </td>
 	                </tr>
               	</c:forEach>
               </tbody>
             </table>
-			<p:page action="manager/GradeServlet" />
+			<p:page action="teacher/PaperServlet" />
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-package com.hs.servlet.teacher;
+package com.hs.servlet.manager;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,37 +9,48 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.hs.service.PaperService;
-import com.hs.service.Impl.PaperServiceImpl;
+import com.hs.service.GradeService;
+import com.hs.service.StudentService;
+import com.hs.service.Impl.GradeServiceImpl;
+import com.hs.service.Impl.StudentServiceImpl;
 import com.hs.util.Page;
 
 /**
- * 跳转到试卷列表
+ * Servlet implementation class StudentServlet
  */
-@WebServlet("/teacher/PaperServlet")
-public class PaperServlet extends HttpServlet {
+@WebServlet("/manager/StudentServlet")
+public class StudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public StudentServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String curPage = request.getParameter("curPage");
 		if(StringUtils.isBlank(curPage)) {
 			curPage="1";
 		}
-		//获取分页对象
+		//获取Page对象
 		Page page = (Page) request.getAttribute("page");
 		if(page == null) {
 			page = new Page();
 		}
-		//获取查询关键字
-		String name = request.getParameter("name");
-		//查询年级列表
-		PaperService ps = new PaperServiceImpl();
-		page = ps.getPaperByName(name,Integer.parseInt(curPage));
+		//获取姓名
+		String name = request.getParameter("name");	
+		//获取page
+		StudentService ss = new StudentServiceImpl();
+		page = ss.getStudentByName(name,Integer.parseInt(curPage));
 		request.setAttribute("page", page);
-		request.getRequestDispatcher("/WEB-INF/page/teacher/paper_index.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/page/manager/stu_list.jsp").forward(request, response);
 	}
 
 	/**
@@ -48,4 +59,5 @@ public class PaperServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+
 }

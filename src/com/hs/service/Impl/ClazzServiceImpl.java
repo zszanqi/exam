@@ -65,5 +65,17 @@ public class ClazzServiceImpl implements ClazzService{
 		return result;
 	}
 
+	//根据年级序号和专业序号获取班级列表
+	@Override
+	public List<Clazz> getClazzListByGradeIdAndMajorId(int gradeId, int majorId) {
+		List<Clazz> list = null;
+		try {
+			list = cd.getClazzByGradeIdAndMajorId(gradeId,majorId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 	
 }
