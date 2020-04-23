@@ -17,7 +17,7 @@ import com.hs.service.Impl.LoginServiceImpl;
 import com.hs.service.Impl.MenuServiceImpl;
 
 /**
- * Servlet implementation class IndexServlet
+ * 登陆成功跳转到首页
  */
 @WebServlet("/IndexServlet")
 public class IndexServlet extends HttpServlet {
@@ -72,11 +72,13 @@ public class IndexServlet extends HttpServlet {
 						response.sendRedirect("LoginServlet");
 						return;
 					}
-				}else {
-		 			response.sendRedirect("LoginServlet");
-		 			return;
 				}
+//				else {
+//		 			response.sendRedirect("LoginServlet");
+//		 			return;
+//				}
 			}
+			response.sendRedirect("LoginServlet");
 
 			
 		}

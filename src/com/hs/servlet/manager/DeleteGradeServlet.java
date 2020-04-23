@@ -30,13 +30,8 @@ public class DeleteGradeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		GradeService gs = new GradeServiceImpl();
-		boolean flag = gs.deleteGradeById(id);
-		if(flag) {
-			response.sendRedirect("manager/GradeServlet");
-		}else {
-			response.getWriter().write("删除失败，两秒后返回年级列表");
-			response.setHeader("refresh", "2;url=manager/GradeServlet");
-		}
+		String result = gs.deleteGradeById(id);
+		response.getWriter().write(result);
 	}
 
 	/**

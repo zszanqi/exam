@@ -22,14 +22,17 @@
 			aria-label="Hide Sidebar"></a>
 		<!-- Navbar Right Menu-->
 		<ul class="app-nav">
+			<c:if test="${sessionScope.user.modified == 0 }">
+				<li style="font-size:15px;line-height:50px;color:red">您当前是初始密码，请尽快修改</li>
+			</c:if>
 			<!-- User Menu-->
 			<li class="dropdown"><a class="app-nav__item" href="#"
 				data-toggle="dropdown" aria-label="Open Profile Menu"><i
 					class="fa fa-user fa-lg"></i></a>
 				<ul class="dropdown-menu settings-menu dropdown-menu-right">
-					<li><a class="dropdown-item" href="page-user.html"><i
+					<li><a class="dropdown-item" href="javascript:changeMenu('ToEditPasswordServlet')"><i
 							class="fa fa-user fa-lg"></i>修改密码</a></li>
-					<li><a class="dropdown-item" href="page-login.html"><i
+					<li><a class="dropdown-item" href="LogOutServlet"><i
 							class="fa fa-sign-out fa-lg"></i>退出</a></li>
 				</ul></li>
 		</ul>
@@ -62,7 +65,7 @@
 		</ul>
 	</aside>
 	
-	<iframe name="pageFrame" id="pageFrame" src="${basePath }testServlet"
+	<iframe name="pageFrame" id="pageFrame" src="${basePath }SubIndexServlet"
 		width="100%" height="800" frameborder="0"></iframe>
 	<!-- 一些必要的javascript -->
 	<script src="${basePath }js/jquery-3.2.1.min.js"></script>

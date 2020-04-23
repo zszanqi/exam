@@ -59,10 +59,11 @@ public class ClazzDaoImpl implements ClazzDao {
 		return rowsCount.intValue();
 	}
 
+	//删除班级
 	@Override
-	public void deleteClazzById(String id) throws SQLException {
-		String sql = "delete from clazz where id=?";
-		qr.update(sql, id);
+	public int deleteClazzById(String clazzId) throws SQLException {
+		String sql = "update clazz set del_flag=1 where id="+clazzId;
+		return qr.update(sql);
 	}
 
 	//保存班级信息

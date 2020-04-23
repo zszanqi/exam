@@ -40,8 +40,8 @@
             <div class="tile-body">
               <form class="row" method="post" action="${basePath }manager/GradeServlet">
                 <div class="form-group col-md-3">
-                  <label class="control-label">年级名称</label>
-                  <input class="form-control" name="name" type="text" value="${name }" placeholder="请输入年级">
+                  <label class="control-label">查询</label>
+                  <input class="form-control" name="name" type="text" value="${name }" placeholder="请输入试卷名称">
                 </div>
                 <div class="form-group col-md-4 align-self-end">
                   <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>查询</button>
@@ -70,7 +70,9 @@
 	                  <td>${status.count }</td>
 	                  <td>${grade.name }</td>
 	                  <td>
-	                  	<button class="btn btn-danger my_del" type="button" onclick="deleteGrade('${grade.id }')">删除</button>
+	                  	<button class="btn btn-danger my_del" type="button" onclick="deletePaper('${grade.id }')">删除</button>
+	                  	<button class="btn btn-danger my_del" type="button" onclick="">编辑</button>
+	                  	<button class="btn btn-danger my_del" type="button" onclick="">试题</button>
 	                  </td>
 	                </tr>
               	</c:forEach>

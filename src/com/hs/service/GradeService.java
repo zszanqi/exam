@@ -8,7 +8,7 @@ import com.hs.util.Page;
 public interface GradeService {
 	public Page<Grade> getGradeByName(String name,Integer curPage);
 
-	public boolean deleteGradeById(String id);
+	public String deleteGradeById(String id);
 	
 	public String saveGradeByName(String name);
 	

@@ -9,7 +9,7 @@ import com.hs.model.Grade;
 public interface GradeDao {
 	public List<Grade> getGradesByName(String name,Page page,Integer curPage) throws SQLException;
 	public int getGradesCount(String name) throws SQLException;
-	public void deleteGradeById(String id) throws SQLException;
+	public int deleteGradeById(String id) throws SQLException;
 	public int saveGrade(String name) throws SQLException;
 	public Grade queryByName(String name) throws SQLException;
 	public List<Grade> getGradeList() throws SQLException;

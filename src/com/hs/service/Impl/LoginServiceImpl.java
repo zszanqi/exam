@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.hs.dao.LoginDao;
 import com.hs.dao.impl.LoginDaoImpl;
@@ -42,6 +43,51 @@ public class LoginServiceImpl implements LoginService{
 			}
 		} catch (SQLException e) {
 			result = "error";
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	//修改密码
+	@Override
+	public String updatePassword(HttpServletRequest request) {
+		String result = null;
+		//获取页面参数
+		String oldPwd = request.getParameter("oldPwd");
+		String newPwd = request.getParameter("newPwd");
+		String rePwd = request.getParameter("rePwd");
+		//判断旧密码是否正确
+		HttpSession session = request.getSession();
+		Integer roleId = (Integer) session.getAttribute("roleId");
+		Object ouser = session.getAttribute("user");
+		String username = null;
+		Integer userId = null;
+		//根据不同角色将session中过去道德用户对象转换为对应的类型并获取username
+		if(roleId==1) {
+			username = ((Student)ouser).getUsername();
+			userId = ((Student)ouser).getId();
+		}else if(roleId==2) {
+			username = ((Teacher)ouser).getUsername();
+			userId = ((Teacher)ouser).getId();
+		}else if(roleId==3) {
+			username = ((Manager)ouser).getUsername();
+			userId = ((Manager)ouser).getId();
+		}
+		try {
+			Object user = ld.login(roleId,username,MD5Util.getMD5(oldPwd));
+			//如果user为空表示原密码错误
+			if(user==null) {
+				result = "wrong";
+			}else {
+				//判断两次输入的密码是否一致
+				if(newPwd!=null && newPwd.equals(rePwd)) {
+					int rows = ld.updatePassword(roleId, MD5Util.getMD5(newPwd), userId);
+					if(rows==1) {
+						result = "ok";
+					}
+				}
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;

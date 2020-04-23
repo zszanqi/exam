@@ -30,17 +30,19 @@ public class ClazzServiceImpl implements ClazzService{
 	}
 	
 
-	//删除功能暂不可用，有外键
+	//删除班级
 	@Override
-	public boolean deleteClazzById(String id) {
-		boolean flag = true;
+	public String deleteClazzById(String id) {
+		String result = null;
 		try {
-			cd.deleteClazzById(id);;
+			int rows = cd.deleteClazzById(id);
+			if(rows==1) {
+				result = "ok";
+			}
 		} catch (SQLException e) {
-			flag = false;
 			e.printStackTrace();
 		}
-		return flag;
+		return result;
 	}
 
 	//保存班级信息

@@ -81,7 +81,7 @@
 					</thead>
 					<tbody align="center">
 						<c:forEach items="${page.data }" var="clazz" varStatus="status">
-							<tr>
+							<tr id="tr${clazz.id }">
 								<td>${status.count }</td>
 								<td>${clazz.gradeName }</td>
 								<td>${clazz.majorName }</td>
@@ -105,9 +105,24 @@
 	<script src="${basePath }js/bootstrap.min.js"></script>
 	<script src="${basePath }js/main.js"></script>
 	<script type="text/javascript">
+		//删除班级
 		function deleteClazz(id) {
-			if (confirm("您确定要删除吗？")) {
-				window.location.href = "manager/DeleteClazzServlet?id=" + id;
+			if(confirm("您确定要删除吗")){
+				$.ajax({
+					url:'${basePath}manager/DeleteClazzServlet',
+					type:'get',
+					data:{'clazzId':id},
+					dataType:'text',
+					success:function(data){
+						if(data=='ok'){
+							alert("删除成功");
+							//删除该行
+							$('#tr'+id).remove();
+						}else{
+							alert("删除失败，请稍后再试");
+						}
+					}
+				});
 			}
 		}
 		function toAdd(){

@@ -32,15 +32,17 @@ public class GradeServiceImpl implements GradeService{
 
 	//通过id删除年级
 	@Override
-	public boolean deleteGradeById(String id) {
-		boolean flag = true;
+	public String deleteGradeById(String id) {
+		String result = null;
 		try {
-			gd.deleteGradeById(id);
+			int rows = gd.deleteGradeById(id);
+			if(rows==1) {
+				result = "ok";
+			}
 		} catch (SQLException e) {
-			flag = false;
 			e.printStackTrace();
 		}
-		return flag;
+		return result;
 	}
 
 	

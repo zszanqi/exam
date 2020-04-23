@@ -22,7 +22,7 @@ public class GradeDaoImpl implements GradeDao{
 	//根据年级名称查询年级列表
 	@Override
 	public List<Grade> getGradesByName(String name,Page page,Integer curPage) throws SQLException {
-		String sql  = "select * from grade where 1=1 ";
+		String sql  = "select * from grade where del_flag=0 ";
 		if(StringUtils.isNotBlank(name)) {
 			sql +=" and name like '%"+name+"%'";
 			page.appendParam("name", name);
@@ -34,7 +34,7 @@ public class GradeDaoImpl implements GradeDao{
 
 	//查询年级总记录数
 	public int getGradesCount(String name) throws SQLException {
-		String sql = "select count(*) from grade where 1=1";
+		String sql = "select count(*) from grade where del_flag=0";
 		if(StringUtils.isNotBlank(name)) {
 			sql += " and name like '%"+name+"%'";
 		}
@@ -44,9 +44,9 @@ public class GradeDaoImpl implements GradeDao{
 
 	//通过id删除年级
 	@Override
-	public void deleteGradeById(String id) throws SQLException {
-		String sql = "delete from grade where id=?";
-		qr.update(sql, id);
+	public int deleteGradeById(String id) throws SQLException {
+		String sql = "update grade set del_flag=1 where id="+id;
+		return qr.update(sql);
 	}
 
 	//通过名称添加年级
@@ -56,10 +56,10 @@ public class GradeDaoImpl implements GradeDao{
 		return qr.update(sql);
 	}
 
-	//根据年纪名查询年级信息
+	//根据年级名查询年级信息
 	@Override
 	public Grade queryByName(String name) throws SQLException {
-		String sql = "select * from grade where name='"+name+"'";
+		String sql = "select * from grade where del_flag=0 and name='"+name+"'";
 		return qr.query(sql, new BeanHandler<Grade>(Grade.class));
 	}
 

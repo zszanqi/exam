@@ -17,7 +17,7 @@ import com.hs.service.Impl.GradeServiceImpl;
 import com.hs.util.Page;
 
 /**
- * Servlet implementation class GradeServlet
+ * 跳转到年级列表
  */
 @WebServlet("/manager/GradeServlet")
 public class GradeServlet extends HttpServlet {

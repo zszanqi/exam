@@ -1,4 +1,4 @@
-package com.hs.servlet.manager;
+package com.hs.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,32 +7,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hs.service.ClazzService;
-import com.hs.service.GradeService;
-import com.hs.service.Impl.ClazzServiceImpl;
-import com.hs.service.Impl.GradeServiceImpl;
+import com.hs.service.LoginService;
+import com.hs.service.Impl.LoginServiceImpl;
 
 /**
- * 管理员删除班级页面
+ * 修改密码Servlet
  */
-@WebServlet("/manager/DeleteClazzServlet")
-public class DeleteClazzServlet extends HttpServlet {
+@WebServlet("/DoEditPasswordServlet")
+public class DoEditPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteClazzServlet() {
-        super();
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("clazzId");
-		ClazzService cs = new ClazzServiceImpl();
-		String result = cs.deleteClazzById(id);
+		LoginService ls = new LoginServiceImpl();
+		String result = ls.updatePassword(request);
 		response.getWriter().write(result);
 	}
 
