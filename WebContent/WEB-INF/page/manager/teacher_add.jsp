@@ -36,8 +36,6 @@
                     <input class="form-control" id="name" name="name" type="text" placeholder="请输入教师名称">
                     <label for="name">教师用户名</label>
                     <input class="form-control" id="username" name="username" type="text" placeholder="请输入教师用户名">
-                    <label for="name">教师密码</label>
-                    <input class="form-control" id="password" name="password" type="text" placeholder="请输入教师密码">
                   </div>
                 </form>
               </div>
@@ -59,7 +57,6 @@
     function toSubmit(){
  		var name = $("#name").val();
  		var username=$("#username").val();
- 		var password=$("#password").val();
  		
  		if(name==null || name==''){
  			alert("教师名称不能为空");
@@ -71,16 +68,11 @@
  			$("#username").focus();
  			return false;
  		}
- 		if(password==null || password==''){
- 			alert("教师密码不能为空");
- 			$("#password").focus();
- 			return false;
- 		}
  		//发送ajax请求
  		$.ajax({
  			url:'${basePath}DoTeacherAddServlet',
  			type:'post',
- 			data:{'name':name,'username':username,'password':password},
+ 			data:{'name':name,'username':username},
  			dataType:'text',
  			success:function(data){
  				if(data=='ok'){

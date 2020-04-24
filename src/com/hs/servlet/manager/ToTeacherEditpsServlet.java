@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hs.service.TeacherService;
-import com.hs.service.Impl.TeacherServiceImpl;
-
 /**
- * Servlet implementation class DeleteTeacherServlet
+ * Servlet implementation class ToTeacherEditpsServlet
  */
-@WebServlet("/DeleteTeacherServlet")
-public class DeleteTeacherServlet extends HttpServlet {
+@WebServlet("/ToTeacherEditpsServlet")
+public class ToTeacherEditpsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteTeacherServlet() {
+    public ToTeacherEditpsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,15 +26,9 @@ public class DeleteTeacherServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
-		TeacherService tea = new TeacherServiceImpl();
-		boolean flag = tea.deleteTeacherById(id);
-		if(flag) {
-			response.sendRedirect("manager/TeacherServlet");
-		}else {
-			response.getWriter().write("删除失败，两秒后返回教师列表");
-			response.setHeader("refresh", "2;url=manager/TeacherServlet");
-		}
+		String editid=request.getParameter("id");
+		request.setAttribute("editid",editid);
+		request.getRequestDispatcher("/WEB-INF/page/manager/teacher_editps.jsp").forward(request, response);
 	}
 
 	/**

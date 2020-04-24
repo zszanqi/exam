@@ -11,32 +11,28 @@ import com.hs.service.TeacherService;
 import com.hs.service.Impl.TeacherServiceImpl;
 
 /**
- * Servlet implementation class DeleteTeacherServlet
+ * Servlet implementation class DoTeacherEditpsServlet
  */
-@WebServlet("/DeleteTeacherServlet")
-public class DeleteTeacherServlet extends HttpServlet {
+@WebServlet("/DoTeacherEditpsServlet")
+public class DoTeacherEditpsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteTeacherServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
-		TeacherService tea = new TeacherServiceImpl();
-		boolean flag = tea.deleteTeacherById(id);
+		String editid=request.getParameter("id");
+		String newps=request.getParameter("newps");
+		TeacherService tea=new TeacherServiceImpl();
+		boolean flag=tea.editpsTeacherByid(editid,newps);
+		String result=null;
 		if(flag) {
-			response.sendRedirect("manager/TeacherServlet");
-		}else {
-			response.getWriter().write("删除失败，两秒后返回教师列表");
-			response.setHeader("refresh", "2;url=manager/TeacherServlet");
+			result="ok";
+			response.getWriter().write(result);
+		}
+		else {
+			result="no";
+			response.getWriter().write(result);
 		}
 	}
 

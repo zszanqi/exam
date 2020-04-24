@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>教师修改</title>
+    <title>教师密码修改</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,11 +17,11 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-edit"></i> 教师修改</h1>
+          <h1><i class="fa fa-edit"></i> 教师密码修改</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item">教师管理</li>
+          <li class="breadcrumb-item">教师密码修改</li>
           <li class="breadcrumb-item"><a href="#">修改</a></li>
         </ul>
       </div>
@@ -31,12 +31,10 @@
             <div class="row">
               <div class="col-lg-6">
               <form action="${basePath }DoTeacherEditServlet" method="post" id="editteacherForm">
-              <input type="hidden" name="id" value="${teacher.id }">
+              <input type="hidden" name="id" value="${editid}">
                   <div class="form-group">
-                    <label for="name">教师名称</label>
-                    <input class="form-control" id="name" name="name" type="text" value="${teacher.realname}" placeholder="请输入教师名称">
-                    <label for="name">教师用户名</label>
-                    <input class="form-control" id="username" name="username" type="text" value="${teacher.username}" placeholder="请输入教师用户名">
+                    <label for="name">教师新密码</label>
+                    <input class="form-control" id="newps" name="newps" type="text" value="${teacher.realname}" placeholder="请输入教师新密码">
                   </div>
                 </form>
               </div>
@@ -56,24 +54,18 @@
     <!-- The javascript plugin to display page loading on top-->
     <script type="text/javascript">
     function toSubmit(){
- 		var name = $("#name").val();
- 		var username=$("#username").val();
- 		
- 		if(name==null || name==''){
- 			alert("教师名称不能为空");
- 			$("#name").focus();
- 			return false;
- 		}
- 		if(username==null || username==''){
- 			alert("教师用户名不能为空");
- 			$("#username").focus();
+ 		var newps=$("#newps").val();
+ 		var editid=$("#editid").val();
+ 		if(newps==null || newps==''){
+ 			alert("教师密码不能为空");
+ 			$("#newps").focus();
  			return false;
  		}
  		//发送ajax请求
  		$.ajax({
- 			url:'${basePath}DoTeacherEditServlet',
+ 			url:'${basePath}DoTeacherEditpsServlet',
  			type:'post',
- 			data:$("#editteacherForm").serialize(),
+ 			data:{'newps':newps,'editid':editid},
  			dataType:'text',
  			success:function(data){
  				if(data=='ok'){

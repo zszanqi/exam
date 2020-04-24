@@ -37,7 +37,7 @@ public class TeacherServiceImpl implements TeacherService{
 		return page;
 	}
 	@Override
-	public String saveTeacherByName(String name,String username,String password) {
+	public String saveTeacherByName(String name,String username) {
 		String result = null;
 		try {
 			//判断改教师名称是否已存在
@@ -46,7 +46,7 @@ public class TeacherServiceImpl implements TeacherService{
 				result = "exist";
 			}else {
 				//不存在,调用添加方法
-				int rows = tea.saveTeacher(name,username,password);
+				int rows = tea.saveTeacher(name,username);
 				if(rows == 1) {
 					result = "ok";
 				}
@@ -79,17 +79,27 @@ public class TeacherServiceImpl implements TeacherService{
 		return Tea;
 	}
 	@Override
-	public boolean editTeacherByid(String id, String name, String username, String password) {
+	public boolean editTeacherByid(String id, String name, String username) {
 		boolean flag = true;
 		try {
-			tea.editTeacherByid(id,name,username,password);
+			tea.editTeacherByid(id,name,username);
 		} catch (SQLException e) {
 			flag = false;
 			e.printStackTrace();
 		}
 		return flag;
 	}
-	
+	@Override
+	public boolean editpsTeacherByid(String id, String password) {
+		boolean flag = true;
+		try {
+			tea.editpsTeacherByid(id,password);
+		} catch (SQLException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
 	
 }
 

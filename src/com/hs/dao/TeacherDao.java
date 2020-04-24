@@ -9,8 +9,9 @@ public interface TeacherDao {
    public List<Teacher> getTeacherByName(String name ,Page page,Integer curPage) throws SQLException;
    public int getTeacherCount(String name) throws SQLException;
    public void deleteTeacherById(String id) throws SQLException;
-   public int saveTeacher(String name,String username,String password) throws SQLException;
+   public int saveTeacher(String name,String username) throws SQLException;
    public Teacher queryByName(String name) throws SQLException;
    public List<Teacher> getTeacherByid(String id) throws SQLException;
-   public void editTeacherByid(String id,String name,String username,String password) throws SQLException;
+   public void editTeacherByid(String id,String name,String username) throws SQLException;
+   public void editpsTeacherByid(String id, String password) throws SQLException;
 }

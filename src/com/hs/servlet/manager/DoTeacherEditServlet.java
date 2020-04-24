@@ -17,13 +17,6 @@ import com.hs.service.Impl.TeacherServiceImpl;
 public class DoTeacherEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DoTeacherEditServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,9 +25,8 @@ public class DoTeacherEditServlet extends HttpServlet {
 		String id=request.getParameter("id");
 		String name=request.getParameter("name");
 		String username=request.getParameter("username");
-		String password=request.getParameter("password");
 		TeacherService tea=new TeacherServiceImpl();
-		boolean flag=tea.editTeacherByid(id, name, username, password);
+		boolean flag=tea.editTeacherByid(id, name, username);
 		String result=null;
 		if(flag) {
 			result="ok";

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>教师管理</title>
+    <title>判断题</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,21 +16,7 @@
   			line-height:6px;
   			padding-top:3px;
   			padding-left:10px;
-  			width:50px;
-  		}
-  		.my_edit{
-  			height:23px;
-  			line-height:6px;
-  			padding-top:3px;
-  			padding-left:10px;
-  			width:50px;
-  		}
-  		.my_editps{
-  			height:23px;
-  			line-height:6px;
-  			padding-top:3px;
-  			padding-left:10px;
-  			width:100px;
+  			width:auto;
   		}
   	</style>
   </head>
@@ -38,25 +24,25 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i>教师管理</h1>
+          <h1><i class="fa fa-th-list"></i>判断题</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item active"><a href="#" >教师管理</a></li>
+          <li class="breadcrumb-item active"><a href="#" >判断题</a></li>
         </ul>
       </div>
       <div class="row">
       	<div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-              <form class="row" method="post" action="${basePath }manager/TeacherServlet">
+              <form class="row" method="post" action="${basePath }teacher/QuestionJudgeServlet">
                 <div class="form-group col-md-3">
-                  <label class="control-label">教师名称</label>
+                  <label class="control-label">题名</label>
                   <input class="form-control" name="name" type="text" value="${name }" placeholder="请输入名称">
                 </div>
                 <div class="form-group col-md-4 align-self-end">
-                  <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>查询</button>
-                   <button class="btn btn-primary" type="button" onclick="toAdd()"><i class="fa fa-fw fa-lg fa-plus-circle"></i>添加</button>
+                  <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>搜索</button>
+                   <button class="btn btn-primary" type="button" onclick="toAdd()"><i class="fa fa-fw fa-lg fa-plus-circle"></i>添加题目</button>
                 </div>
               </form>
             </div>
@@ -66,30 +52,34 @@
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
-            <h3 class="tile-title">教师列表</h3>
+            <h3 class="tile-title">判断题</h3>
             <table class="table table-hover">
               <thead align="center">
                 <tr>
-                  <th>序号</th>
-                  <th>教师名称</th>
+                  <th>id</th>
+                  <th>标题</th>
+                  <th>答案</th>
+                  <th>分值</th>
                   <th>操作</th>
                 </tr>
               </thead>
               <tbody align="center">
-              	<c:forEach items="${page.data }" var="teacher" varStatus="status">
-              		<tr>
+    			<c:forEach items="${page.data }" var="q" varStatus="status">
+              		<tr id="tr${q.id }">
 	                  <td>${status.count}</td>
-	                  <td>${teacher.realname }</td>
+	                  <td>${q.title }</td>
+	                  <td>${q.answer }</td>
+	                  <td>${q.score }</td>
 	                  <td>
-	                        <button class="btn btn-info my_edit" type="button" onclick="editTeacher('${teacher.id }')">修改</button>
-	                  		<button class="btn btn-danger my_del" type="button" onclick="deleteTeacher('${teacher.id }')">删除</button>
-	                  		<button class="btn btn-primary my_editps" type="button" onclick="editpsTeacher('${teacher.id }')">重置密码</button>
+	                        <button class="btn btn-info my_del" type="button" onclick="editQuestionJudge('${q.id }')">编辑</button>
+	                        <button class="btn btn-success my_del" type="button" onclick="submitQuestionJudge('${q.id }')">正答率</button>
+	                  		<button class="btn btn-danger my_del" type="button" onclick="deleteQuestionJudge('${q.id }')">删除</button>
 	                  </td>
 	                </tr>
               	</c:forEach>
               </tbody>
             </table>
-             <p:page action="manager/TeacherServlet"/>
+             <p:page action="teacher/QuestionJudgeServlet"/>
           </div>
         </div>
       </div>
@@ -101,23 +91,19 @@
     <script src="${basePath }js/main.js"></script>
     <script type="text/javascript">
     function toAdd(){
-		window.location.href='${basePath}ToTeacherAddServlet';
+		window.location.href='${basePath}teacher/ToQuestionJudgeAddServlet';
 	}
-    function deleteTeacher(id) {
+    function deleteQuestionJudge(id) {
 		if (confirm("您确定要删除吗？")) {
-			window.location.href = "${basePath}DeleteTeacherServlet?id=" + id;
+			window.location.href = "${basePath}teacher/DeleteQuestionJudgeServlet?id=" + id;
 		}
 	}
-    function editTeacher(id) {
+    function editQuestionJudge(id) {
 		if (confirm("您确定要修改吗？")) {
-			window.location.href = "${basePath}ToTeacherEditServlet?id=" + id;
+			window.location.href = "${basePath}teacher/ToQuestionJudgeEditServlet?id=" + id;
 		}
 	}
-    function editpsTeacher(id) {
-		if (confirm("您确定要重置密码吗？")) {
-			window.location.href = "${basePath}ToTeacherEditpsServlet?id=" + id;
-		}
-	}
+
     </script>
   </body>
 </html>

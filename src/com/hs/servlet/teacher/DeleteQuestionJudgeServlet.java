@@ -1,4 +1,4 @@
-package com.hs.servlet.manager;
+package com.hs.servlet.teacher;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,44 +7,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hs.service.TeacherService;
-import com.hs.service.Impl.TeacherServiceImpl;
+
+import com.hs.service.Impl.QuestionJudgeServiceImpl;
 
 /**
- * Servlet implementation class DeleteTeacherServlet
+ * 删除判断题方法
  */
-@WebServlet("/DeleteTeacherServlet")
-public class DeleteTeacherServlet extends HttpServlet {
+@WebServlet("/teacher/DeleteQuestionJudgeServlet")
+public class DeleteQuestionJudgeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteTeacherServlet() {
+    public DeleteQuestionJudgeServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
-		TeacherService tea = new TeacherServiceImpl();
-		boolean flag = tea.deleteTeacherById(id);
-		if(flag) {
-			response.sendRedirect("manager/TeacherServlet");
-		}else {
-			response.getWriter().write("删除失败，两秒后返回教师列表");
-			response.setHeader("refresh", "2;url=manager/TeacherServlet");
-		}
+		String title = request.getParameter("title");
+		QuestionJudgeServiceImpl qjs = new QuestionJudgeServiceImpl();
+		String result = qjs.deleteQuestionJudgeById(title);
+		response.getWriter().write(result);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

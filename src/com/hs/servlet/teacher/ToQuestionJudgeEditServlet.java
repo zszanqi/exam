@@ -1,44 +1,44 @@
-package com.hs.servlet.manager;
+package com.hs.servlet.teacher;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.hs.model.QuestionJudge;
+import com.hs.model.Teacher;
+import com.hs.service.QuestionJudgeService;
 import com.hs.service.TeacherService;
+import com.hs.service.Impl.QuestionJudgeServiceImpl;
 import com.hs.service.Impl.TeacherServiceImpl;
 
-/**
- * Servlet implementation class DeleteTeacherServlet
- */
-@WebServlet("/DeleteTeacherServlet")
-public class DeleteTeacherServlet extends HttpServlet {
+@WebServlet("/teacher/ToQuestionJudgeEditServlet")
+public class ToQuestionJudgeEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteTeacherServlet() {
+    public ToQuestionJudgeEditServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
-		TeacherService tea = new TeacherServiceImpl();
-		boolean flag = tea.deleteTeacherById(id);
-		if(flag) {
-			response.sendRedirect("manager/TeacherServlet");
-		}else {
-			response.getWriter().write("删除失败，两秒后返回教师列表");
-			response.setHeader("refresh", "2;url=manager/TeacherServlet");
-		}
+		String name=request.getParameter("name");
+		QuestionJudgeService questionjudge = new QuestionJudgeServiceImpl();
+		List<QuestionJudge> qj= questionjudge.getQuestionJudgeList();
+		System.out.println(qj);
+		request.setAttribute("questionjudge", qj.get(0));
+		request.getRequestDispatcher("/WEB-INF/page/teacher/question_judge_edit.jsp").forward(request, response);
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

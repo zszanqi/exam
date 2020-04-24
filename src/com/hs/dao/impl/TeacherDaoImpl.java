@@ -46,9 +46,9 @@ public class TeacherDaoImpl implements TeacherDao{
 		return rowsCount.intValue();
 	}
 	@Override
-	public int saveTeacher(String name,String username,String password) throws SQLException {
+	public int saveTeacher(String name,String username) throws SQLException {
 		String sql = "insert into teacher(realname,username,password) values(?,?,?)";
-		return qr.update(sql,name,username,password);
+		return qr.update(sql,name,username,"123456");
 	}
 	@Override
 	public Teacher queryByName(String name) throws SQLException {
@@ -68,10 +68,14 @@ public class TeacherDaoImpl implements TeacherDao{
 		return teacher;
 	}
 	@Override
-	public void editTeacherByid(String id, String name, String username, String password) throws SQLException {
-		String sql="update teacher set realname=?,username=?,password=? where id=?";
-		qr.update(sql,name,username,password,id);
+	public void editTeacherByid(String id, String name, String username) throws SQLException {
+		String sql="update teacher set realname=?,username=? where id=?";
+		qr.update(sql,name,username,id);
 	}
-	
+	@Override
+	public void editpsTeacherByid(String id, String password) throws SQLException {
+		String sql="update teacher set password=? where id=?";
+		qr.update(sql,password,id);
+	}
 	
 }
