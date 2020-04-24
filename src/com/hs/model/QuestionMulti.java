@@ -5,13 +5,13 @@ public class QuestionMulti {
 
     private String title;
 
-    private String optiona;
+    private String optionA;
 
-    private String optionb;
+    private String optionB;
 
-    private String optionc;
+    private String optionC;
 
-    private String optiond;
+    private String optionD;
 
     private String answer;
 
@@ -39,36 +39,36 @@ public class QuestionMulti {
 		this.title = title;
 	}
 
-	public String getOptiona() {
-		return optiona;
+	public String getOptionA() {
+		return optionA;
 	}
 
-	public void setOptiona(String optiona) {
-		this.optiona = optiona;
+	public void setOptionA(String optionA) {
+		this.optionA = optionA;
 	}
 
-	public String getOptionb() {
-		return optionb;
+	public String getOptionB() {
+		return optionB;
 	}
 
-	public void setOptionb(String optionb) {
-		this.optionb = optionb;
+	public void setOptionB(String optionB) {
+		this.optionB = optionB;
 	}
 
-	public String getOptionc() {
-		return optionc;
+	public String getOptionC() {
+		return optionC;
 	}
 
-	public void setOptionc(String optionc) {
-		this.optionc = optionc;
+	public void setOptionC(String optionC) {
+		this.optionC = optionC;
 	}
 
-	public String getOptiond() {
-		return optiond;
+	public String getOptionD() {
+		return optionD;
 	}
 
-	public void setOptiond(String optiond) {
-		this.optiond = optiond;
+	public void setOptionD(String optionD) {
+		this.optionD = optionD;
 	}
 
 	public String getAnswer() {
