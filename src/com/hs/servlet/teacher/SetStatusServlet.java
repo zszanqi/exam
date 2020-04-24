@@ -7,46 +7,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
-
 import com.hs.service.PaperService;
 import com.hs.service.Impl.PaperServiceImpl;
-import com.hs.util.Page;
 
 /**
- * 跳转到试卷列表
+ * Servlet implementation class SetStatusServlet
  */
-@WebServlet("/teacher/PaperServlet")
-public class PaperServlet extends HttpServlet {
+@WebServlet("/teacher/SetStatusServlet")
+public class SetStatusServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//获取当前页
-		String curPage = request.getParameter("curPage");
-		if(StringUtils.isBlank(curPage)) {
-			curPage="1";//如果页码为空则初始化为1
-		}
-		//获取分页对象
-		Page page = (Page) request.getAttribute("page");
-		if(page == null) {
-			page = new Page();
-		}
-		//获取查询关键字
-		String name = request.getParameter("name");
-		//调用service层方法查询分页
+		//获取请求参数
+		String status = request.getParameter("status");
+		String paperId = request.getParameter("paperId");
+		
 		PaperService ps = new PaperServiceImpl();
-		page = ps.getPaper4PerPage(name,Integer.parseInt(curPage));
-		request.setAttribute("page", page);
-		request.getRequestDispatcher("/WEB-INF/page/teacher/paper_index.jsp").forward(request, response);
+		String result = ps.setStatus(Integer.parseInt(status), Integer.parseInt(paperId));
+		response.getWriter().write(result);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

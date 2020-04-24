@@ -37,7 +37,7 @@
       	<div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-              <form class="row" method="post" action="${basePath }manager/major">
+              <form class="row" method="post" action="${basePath }manager/MajorServlet">
                 <div class="form-group col-md-3">
                   <label class="control-label">专业名称</label>
                   <!-- 此处input用name来传递信息 -->
@@ -65,7 +65,7 @@
                 </tr>
               </thead>
               <tbody align="center">
-              	<c:forEach items="${list }" var="major" varStatus="status">
+              	<c:forEach items="${page.data }" var="major" varStatus="status">
               		<tr>
 	                  <td>${status.count }</td>
 	                  <td>${major.name }</td>
@@ -76,6 +76,7 @@
               	</c:forEach>
               </tbody>
             </table>
+            <p:page action="/manager/MajorServlet" />
           </div>
         </div>
       </div>

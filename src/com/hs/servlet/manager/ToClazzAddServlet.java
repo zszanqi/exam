@@ -31,7 +31,7 @@ public class ToClazzAddServlet extends HttpServlet {
 		GradeService gs = new GradeServiceImpl();
 		MajorService ms = new MajorServiceImpl();
 		List<Grade> gradeList = gs.getGradeList();
-		List<Major> majorList = ms.getMajorList();
+		List<Major> majorList = ms.GetAllMajor();
 		//将查询到的列表集合放入request域中传回页面
 		request.setAttribute("gradeList", gradeList);
 		request.setAttribute("majorList", majorList);

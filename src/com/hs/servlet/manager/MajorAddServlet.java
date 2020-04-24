@@ -1,6 +1,7 @@
 package com.hs.servlet.manager;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,8 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/manager/ToMajorAddServlet")
-public class ToMajorAddServlet extends HttpServlet{
+import com.hs.service.MajorService;
+import com.hs.service.Impl.MajorServiceImpl;
+
+@WebServlet("/manager/MajorAddServlet")
+public class MajorAddServlet extends HttpServlet{
 
 	/**
 	 * 
@@ -18,7 +22,13 @@ public class ToMajorAddServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/page/manager/major_add.jsp").forward(request, response);
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		String majorname = request.getParameter("majorname");
+		MajorService ms = new MajorServiceImpl();
+		String result = ms.AddMajor(majorname);
+		System.out.println(result);
+		response.getWriter().write(result);
 	}
 
 	@Override

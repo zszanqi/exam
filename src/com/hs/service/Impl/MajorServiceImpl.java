@@ -11,36 +11,49 @@ import com.hs.service.MajorService;
 import com.hs.util.Page;
 
 public class MajorServiceImpl implements MajorService{
-	
-	private MajorDao majorDao = new MajorDaoImpl();
-	
-	//查询所有专业列表
+
+	MajorDao md = new MajorDaoImpl();
 	@Override
-	public List<Major> getMajorList() {
+	public Page<Major> GetMajorByName(String name,Page page,Integer curPage){
+		List<Major> list = null;
+		int rowsCount = 0;
+		try {
+			list = md.GetMajorByName(name, page, curPage);
+			rowsCount = md.GetMajorCount(name);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		page.setParam(list,curPage, rowsCount);
+		return page;
+	}
+	
+	public List<Major> GetAllMajor(){
 		List<Major> list = null;
 		try {
-			list = majorDao.getMajorList();
-		} catch (Exception e) {
+			list = md.GetAllMajor();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return list;
 	}
-   /*
-    * 根据年纪名称查询列表
-    * @see com.hs.service.MajorService#getGradesByName(java.lang.String)
-    */
+
 	@Override
-	public List<Major> getMajorsByName(String name) {
-		List<Major> list = null;
+	public String AddMajor(String name){
+		String result = null;
 		try {
-			list = majorDao.getMajorByList(name);
-		} catch (Exception e) {
+			if(md.GetMajorByName(name)==null){
+				int flag = md.AddMajor(name);
+				if(flag == 0){
+					result = "error";
+				}else{
+					result = "success";
+				}
+			}else{
+				result = "exist";
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return list;
+		return result;
 	}
 }
-	
-
-	
-

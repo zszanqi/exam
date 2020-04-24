@@ -116,7 +116,6 @@
 	<script src="${basePath }js/bootstrap.min.js"></script>
 	<script src="${basePath }js/main.js"></script>
 	<script type="text/javascript">
-	function deleteGrade(id) {
 		function setStatus(status,paperId){
 			if(confirm("您确定要切换吗")){
 				$.ajax({
@@ -125,7 +124,6 @@
 					data:{'status':status,'paperId':paperId},
 					dataType:'text',
 					success:function(data){
-						
 						if(data=='ok'){
 							alert("设置成功");
 							if(status=='3'){
@@ -142,8 +140,9 @@
 					}
 				});
 			}
-			
 		}
+		
+	function deleteGrade(id) {
 		if (confirm("您确定要删除吗？")) {
 			$.ajax({
 				url:'${basePath}manager/DeleteGradeServlet',

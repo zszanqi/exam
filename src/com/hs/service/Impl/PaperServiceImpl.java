@@ -2,6 +2,7 @@ package com.hs.service.Impl;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.hs.dao.PaperDao;
 import com.hs.dao.impl.PaperDaoImpl;
@@ -13,22 +14,38 @@ public class PaperServiceImpl implements PaperService {
 
 	private PaperDao pd = new PaperDaoImpl();
 	
-	
-	//获取试卷分页列表
+	//获取试卷分页page对象
 	@Override
-	public Page getPaperByName(String name, int curPage) {
+	public Page getPaper4PerPage(String name, int curPage) {
 		Page page = new Page();
-		List<Exam> list = null;
 		int rowsCount = 0;
+		List<Map<String,Object>> list = null;
 		try {
-			list = pd.getPaperByName(name,page,curPage);
-			rowsCount = pd.getPaperCount(name);
-			//将查询到的结果封装到page对象中
+			//查询列表数据
+			list = pd.getPaperPerPage4(name, page, curPage);
+			rowsCount = pd.getPaperCount4Page(name);
+			//将查询到的列表数据和总记录数封装到page对象中
 			page.setParam(list, curPage, rowsCount);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return page;
+	}
+
+	@Override
+	public String setStatus(Integer status, Integer paperId) {
+		String result = null;
+		int rows = 0;
+		try {
+			rows = pd.setStatus(status, paperId);
+			if(rows ==1) {
+				result = "ok";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 }

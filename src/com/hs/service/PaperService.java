@@ -4,6 +4,6 @@ import com.hs.util.Page;
 
 public interface PaperService {
 
-	Page getPaperByName(String name, int curPage);
-
+	Page getPaper4PerPage(String name, int curPage);
+	public String setStatus(Integer status,Integer paperId);
 }

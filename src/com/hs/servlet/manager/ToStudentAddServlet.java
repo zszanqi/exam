@@ -48,7 +48,7 @@ public class ToStudentAddServlet extends HttpServlet {
 			GradeService gradeService = new GradeServiceImpl();
 			List<Grade> gradeList = gradeService.getGradeList();
 			MajorService majorService = new MajorServiceImpl();
-			List<Major> majorList = majorService.getMajorList();
+			List<Major> majorList = majorService.GetAllMajor();
 			//将查询到的列表返回页面
 			request.setAttribute("gradeList", gradeList);
 			request.setAttribute("majorList", majorList);
