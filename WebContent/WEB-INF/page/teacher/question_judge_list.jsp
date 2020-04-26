@@ -95,7 +95,21 @@
 	}
     function deleteQuestionJudge(id) {
 		if (confirm("您确定要删除吗？")) {
-			window.location.href = "${basePath}teacher/DeleteQuestionJudgeServlet?id=" + id;
+			$.ajax({
+				url:'${basePath}teacher/DeleteQuestionJudgeServlet',
+				type:'post',
+				data:{"id":id},
+				dataType:'text',
+				success:function(data){
+					if(data=="ok"){
+						alert("删除成功");
+						//删除该行
+						$('#tr'+id).remove();
+					}else{
+						alert("删除失败，请稍后再试");
+					}
+				}
+			});
 		}
 	}
     function editQuestionJudge(id) {

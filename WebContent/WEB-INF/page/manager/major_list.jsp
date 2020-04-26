@@ -70,7 +70,7 @@
 	                  <td>${status.count }</td>
 	                  <td>${major.name }</td>
 	                  <td>
-	                  	<button class="btn btn-danger my_del" type="button">删除</button>
+	                  	<button class="btn btn-danger my_del" type="button" onclick="toDel('${major.id}')">删除</button>
 	                  </td>
 	                </tr>
               	</c:forEach>
@@ -90,6 +90,25 @@
       function toAdd() {
 		window.location.href='${basePath }manager/ToMajorAddServlet';
 		}
+      function toDel(id){
+    	  if(confirm("你确定要删除吗？")){
+    		  $.ajax({
+  				url:'${basePath}manager/DeleteMajorServlet',
+  				type:'get',
+  				dataType:'text',
+  				data:{'id':id},
+  				success:function(data){
+  					if(data=='ok'){
+  						alert("删除成功");
+  						//删除该行
+  						$('#tr'+id).remove();
+  					}else{
+  						alert("删除失败，请稍后再试");
+  					}
+  				}
+  			});
+    	  }
+      }
     </script>
   </body>
 </html>

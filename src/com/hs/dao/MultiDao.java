@@ -22,6 +22,6 @@ public interface MultiDao {
 
 	public String editMulti(String id, String title, String optionA, String optionB, String optionC, String optionD,
 			String answer, Double score)throws SQLException; 
-	
+	public List<QuestionMulti> getMultiAll(String title) throws SQLException;
 
 }

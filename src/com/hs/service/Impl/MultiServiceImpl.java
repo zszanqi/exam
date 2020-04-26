@@ -2,10 +2,12 @@ package com.hs.service.Impl;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.hs.dao.MultiDao;
 import com.hs.dao.impl.MultiDaoImpl;
 import com.hs.model.QuestionMulti;
+
 import com.hs.service.MultiService;
 import com.hs.util.Page;
 
@@ -58,5 +60,17 @@ public class MultiServiceImpl implements MultiService{
 	public String editMulti(String id, String title, String optionA, String optionB, String optionC, String optionD,
 			String answer, Double score) throws SQLException {
 		return multiDao.editMulti(id ,title, optionA, optionB, optionC, optionD, answer, score);
+	}
+
+	//根据条件查询多选题列表
+	@Override
+	public List<QuestionMulti> getMultiAll(String title) {
+		List<QuestionMulti> list = null;
+		try {
+			list = multiDao.getMultiAll(title);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 }

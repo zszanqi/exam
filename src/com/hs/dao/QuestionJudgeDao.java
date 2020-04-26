@@ -13,4 +13,5 @@ public interface QuestionJudgeDao {
 	public abstract int saveQuestionJudge(String name) throws SQLException;
 	public abstract QuestionJudge queryByName(String name) throws SQLException;
 	public abstract List<QuestionJudge> getQuestionJudgeList() throws SQLException;
+	public abstract List<QuestionJudge> getJudgeAll(String title) throws SQLException;
 }

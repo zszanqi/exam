@@ -46,7 +46,7 @@ public class MajorServiceImpl implements MajorService{
 				if(flag == 0){
 					result = "error";
 				}else{
-					result = "success";
+					result = "ok";
 				}
 			}else{
 				result = "exist";

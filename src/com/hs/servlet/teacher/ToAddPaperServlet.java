@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ToAddPaperServlet
+ * 跳转到试卷添加页面
  */
 @WebServlet("/teacher/ToAddPaperServlet")
 public class ToAddPaperServlet extends HttpServlet {

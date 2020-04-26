@@ -28,9 +28,9 @@ public class DeleteQuestionJudgeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String title = request.getParameter("title");
+		String id = request.getParameter("id");
 		QuestionJudgeServiceImpl qjs = new QuestionJudgeServiceImpl();
-		String result = qjs.deleteQuestionJudgeById(title);
+		String result = qjs.deleteQuestionJudgeById(id);
 		response.getWriter().write(result);
 	}
 

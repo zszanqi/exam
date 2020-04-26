@@ -78,13 +78,13 @@
  		}
  		//发送ajax请求
  		$.ajax({
- 			url:'${basePath}DoQuestionJudgeAddServlet',
+ 			url:'${basePath}teacher/DoQuestionJudgeAddServlet',
  			type:'post',
  			data:{'title':title,'answer':answer,'score':score},
  			dataType:'text',
  			success:function(data){
  				if(data=='ok'){
- 					window.location.href='${basePath}manager/QuestionJudgeServlet';
+ 					window.location.href='${basePath}teacher/QuestionJudgeServlet';
  				}else if(data=='exist'){
  					alert("该题目已添加");
  				}else{

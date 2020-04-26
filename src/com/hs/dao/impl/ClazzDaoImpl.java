@@ -89,4 +89,22 @@ public class ClazzDaoImpl implements ClazzDao {
 		return qr.query(sql, new BeanListHandler<Clazz>(Clazz.class));
 	}
 
+	//获取所有班级
+	@Override
+	public List<Map<String, Object>> queryClazzList(String gradeName, String majorName) throws SQLException {
+		String sql = "select t1.id,t1.cno,t2.name as gradeName,t3.name as majorName "
+				+ " from clazz t1 "
+				+ " left join grade t2 on t1.fk_grade=t2.id "
+				+ " left join major t3 on t1.fk_major=t3.id where t1.del_flag=0 ";
+		//判断查询关键字是否为空
+		if(StringUtils.isNotBlank(gradeName)) {
+			sql += " and t2.name like '%"+gradeName+"%'";
+		}
+		if(StringUtils.isNotBlank(majorName)) {
+			sql += " and t3.name like '%"+majorName+"%'";
+		}
+		sql += " order by t1.id desc";
+		return qr.query(sql, new MapListHandler());
+	}
+
 }

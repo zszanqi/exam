@@ -84,6 +84,7 @@
 	                        <button class="btn btn-info my_edit" type="button" onclick="editTeacher('${teacher.id }')">修改</button>
 	                  		<button class="btn btn-danger my_del" type="button" onclick="deleteTeacher('${teacher.id }')">删除</button>
 	                  		<button class="btn btn-primary my_editps" type="button" onclick="editpsTeacher('${teacher.id }')">重置密码</button>
+	                  		<button class="btn btn-primary my_editps" type="button" onclick="editclazzTeacher('${teacher.id }')">编辑班级</button>
 	                  </td>
 	                </tr>
               	</c:forEach>
@@ -116,6 +117,12 @@
     function editpsTeacher(id) {
 		if (confirm("您确定要重置密码吗？")) {
 			window.location.href = "${basePath}ToTeacherEditpsServlet?id=" + id;
+		}
+	}
+    function editclazzTeacher(id) {
+		if (confirm("您确定编辑班级吗？")) {
+			window.location.href = "${basePath}TeacherClazzServlet?flag=1&id=" + id;
+			//window.location.href='${basePath}manager/teaList?flag=1&teaId='+teaId;
 		}
 	}
     </script>

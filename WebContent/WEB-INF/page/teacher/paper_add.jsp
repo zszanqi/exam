@@ -30,28 +30,14 @@
           <div class="tile">
             <div class="row">
               <div class="col-lg-6">
-                <form id="gradeForm" method="post">
+                <form id="paperForm" method="post">
            		  <div class="form-group">
-           		  	<label for="gradeSelect">所属年级</label>
-           		  	<select class="form-control" id="gradeSelect" name="gradeId">
-           		  	<option value="">--请选择--</option>
-           		  	<c:forEach items="${gradeList }" var="g">
-           		  		<option value="${g.id }">${g.name }</option>
-           		  	</c:forEach>
-           		  	</select>                  	
-           		  </div>
-           		  <div class="form-group">
-           		  	<label for="majorSelect">所属专业</label>
-           		  	<select class="form-control" id="majorSelect" name="majorId">
-           		  	<option value="">--请选择--</option>
-           		  	<c:forEach items="${majorList }" var="m">
-           		  		<option value="${m.id }">${m.name }</option>
-           		  	</c:forEach>
-           		  	</select>           	
+           		  	<label for="">试卷标题</label>
+           		  	<input class="form-control" id="papertitle" name="papertitle" type="text" placeholder="请输入试卷标题">           	
            		  </div>
                   <div class="form-group">
-                    <label for="name">班级名称</label>
-                    <input class="form-control" id="cno" name="cno" type="number" placeholder="请输入班级名称">
+                    <label for="name">考试时长</label>
+                    <input class="form-control" id="time" name="time" type="text" placeholder="请输入考试时长">
                   </div>
                 </form>
               </div>
@@ -71,35 +57,28 @@
     <!-- The javascript plugin to display page loading on top-->
     <script type="text/javascript">
     function toSubmit(){
-    	var gradeId = $("#gradeSelect").val();
-    	if(gradeId==null || gradeId==''){
- 			alert("年级不能为空");
- 			$("#gradeSelect").focus();
+    	var papertitle = $('#papertitle').val();
+    	if(papertitle==null || papertitle==''){
+ 			alert("标题不能为空");
+ 			$("#papertitle").focus();
  			return false;
  		}
-    	var majorId = $("#majorSelect").val();
-    	if(majorId==null || majorId==''){
+    	var time = $("#time").val();
+    	if(time==null || time==''){
  			alert("专业不能为空");
- 			$("#majorSelect").focus();
+ 			$("#time").focus();
  			return false;
  		}
- 		var cno = $("#cno").val();
- 		if(cno==null || cno==''){
- 			alert("班级名称不能为空");
- 			$("#cno").focus();
- 			return false;
- 		}
+ 		var teacherId = ${sessionScope.user.id };
  		//发送ajax请求
  		$.ajax({
- 			url:'${basePath}manager/DoClazzAddServlet',
+ 			url:'${basePath}teacher/DoPaperAddServlet',
  			type:'post',
- 			data:{'gradeId':gradeId,'majorId':majorId,'cno':cno},
+ 			data:{'papertitle':papertitle,'time':time,'teacherId':teacherId},
  			dataType:'text',
  			success:function(data){
  				if(data=='ok'){
- 					window.location.href='${basePath}manager/ClazzServlet';
- 				}else if(data=='exist'){
- 					alert("该班级已添加");
+ 					window.location.href='${basePath}teacher/PaperServlet';
  				}else{
  					alert("系统异常，请稍后再试");
  				}

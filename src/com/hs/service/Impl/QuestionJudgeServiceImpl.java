@@ -6,6 +6,7 @@ import java.util.List;
 import com.hs.dao.QuestionJudgeDao;
 import com.hs.dao.impl.QuestionJudgeDaoImpl;
 import com.hs.model.QuestionJudge;
+import com.hs.model.QuestionMulti;
 import com.hs.service.QuestionJudgeService;
 import com.hs.util.Page;
 
@@ -83,6 +84,19 @@ public class QuestionJudgeServiceImpl implements QuestionJudgeService{
 	public boolean editQuestionJudgeByid(String title, String answer, String score) {
 		boolean flag = true;
 		return flag;
+	}
+
+
+	//获取所有
+	@Override
+	public List<QuestionJudge> getJudgeAll(String title) {
+		List<QuestionJudge> list = null;
+		try {
+			list = qjd.getJudgeAll(title);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }

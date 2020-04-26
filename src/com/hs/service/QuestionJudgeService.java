@@ -13,4 +13,6 @@ public interface QuestionJudgeService {
 	public abstract String saveQuestionJudgeByName(String name, String answer, String score);
 	
 	public abstract List<QuestionJudge> getQuestionJudgeList();
+
+	public abstract List<QuestionJudge> getJudgeAll(String title);
 }

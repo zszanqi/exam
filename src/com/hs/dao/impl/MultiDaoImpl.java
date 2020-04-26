@@ -95,4 +95,14 @@ public class MultiDaoImpl implements MultiDao {
 		return db.update(sql);
 	}
 
+	@Override
+	public List<QuestionMulti> getMultiAll(String title) throws SQLException {
+		String sql = "select * from question_multi where del_flag=0";
+		if(StringUtils.isNotBlank(title)){
+			sql +=" and title like'%"+title+"%'";
+		}
+		sql +=" order by id desc ";
+		return db.query(sql,new BeanListHandler<QuestionMulti>(QuestionMulti.class));
+	}
+
 }

@@ -77,5 +77,16 @@ public class ClazzServiceImpl implements ClazzService{
 		return list;
 	}
 
+	//获取所有班级
+	@Override
+	public List<Map<String, Object>> getClazzAll(String gradeName, String majorName) {
+		List<Map<String,Object>> list = null;
+		try {
+			list = cd.queryClazzList(gradeName, majorName);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 }

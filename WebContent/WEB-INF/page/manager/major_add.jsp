@@ -61,13 +61,13 @@
      		}
      		//发送ajax请求
      		$.ajax({
-     			url:'${basePath}manager/DoGradeAddServlet',
+     			url:'${basePath}manager/MajorAddServlet',
      			type:'post',
      			data:{'name':name},
      			dataType:'text',
      			success:function(data){
      				if(data=='ok'){
-     					window.location.href='${basePath}manager/major';
+     					window.location.href='${basePath}manager/MajorServlet';
      				}else if(data=='exist'){
      					alert("该专业已添加");
      				}else{

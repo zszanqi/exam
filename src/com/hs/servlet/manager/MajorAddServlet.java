@@ -24,10 +24,9 @@ public class MajorAddServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		String majorname = request.getParameter("majorname");
+		String name = request.getParameter("name");
 		MajorService ms = new MajorServiceImpl();
-		String result = ms.AddMajor(majorname);
-		System.out.println(result);
+		String result = ms.AddMajor(name);
 		response.getWriter().write(result);
 	}
 
