@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/base.jsp"%>
 
-<!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="utf-8">

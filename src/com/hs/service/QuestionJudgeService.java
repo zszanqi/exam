@@ -10,9 +10,13 @@ public interface QuestionJudgeService {
 
 	public abstract String deleteQuestionJudgeById(String id);
 	
-	public abstract String saveQuestionJudgeByName(String name, String answer, String score);
+	public abstract String saveQuestionJudgeByName(String name, String answer, Double score);
 	
 	public abstract List<QuestionJudge> getQuestionJudgeList();
 
 	public abstract List<QuestionJudge> getJudgeAll(String title);
+
+	public abstract boolean editQuestionJudgeByid(int id,String title, String answer, double score);
+
+	public abstract List<QuestionJudge> getQuestionJudgeById(int questionId);
 }

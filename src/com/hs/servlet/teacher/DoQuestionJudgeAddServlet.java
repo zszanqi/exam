@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.hs.service.QuestionJudgeService;
 import com.hs.service.Impl.QuestionJudgeServiceImpl;
 
 
@@ -17,13 +18,6 @@ import com.hs.service.Impl.QuestionJudgeServiceImpl;
 public class DoQuestionJudgeAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DoQuestionJudgeAddServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -34,8 +28,8 @@ public class DoQuestionJudgeAddServlet extends HttpServlet {
 		String answer = request.getParameter("answer");
 		String score = request.getParameter("score");
 		//调用service层方�?
-		QuestionJudgeServiceImpl qj = new QuestionJudgeServiceImpl();
-		String result = qj.saveQuestionJudgeByName(title,answer,score);
+		QuestionJudgeService qj = new QuestionJudgeServiceImpl();
+		String result = qj.saveQuestionJudgeByName(title,answer,Double.parseDouble(score));
 		//结果返回给页�?
 		response.getWriter().write(result);
 	}

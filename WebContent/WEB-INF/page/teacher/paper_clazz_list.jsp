@@ -62,7 +62,7 @@
               <thead align="center">
                 <tr>
                   <th> 
-                  	<input type="checkbox">
+                  	
                   </th>
                   <th>序号</th>
                   <th>年级</th>

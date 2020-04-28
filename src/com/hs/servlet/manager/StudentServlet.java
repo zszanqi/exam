@@ -16,7 +16,7 @@ import com.hs.service.Impl.StudentServiceImpl;
 import com.hs.util.Page;
 
 /**
- * Servlet implementation class StudentServlet
+ * 学生页面
  */
 @WebServlet("/manager/StudentServlet")
 public class StudentServlet extends HttpServlet {
@@ -27,7 +27,6 @@ public class StudentServlet extends HttpServlet {
      */
     public StudentServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

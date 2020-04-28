@@ -32,7 +32,7 @@ public class QuestionJudgeServiceImpl implements QuestionJudgeService{
 
 	
 	//通过名称保存判断题
-	public String saveQuestionJudgeByName(String name, String answer, String score) {
+	public String saveQuestionJudgeByName(String name, String answer, Double score) {
 		String result = null;
 		try {
 			//鍒ゆ柇鏀瑰勾绾у悕绉版槸鍚﹀凡瀛樺湪
@@ -41,7 +41,7 @@ public class QuestionJudgeServiceImpl implements QuestionJudgeService{
 				result = "exist";
 			}else {
 				//涓嶅瓨鍦�,璋冪敤娣诲姞鏂规硶
-				int rows = qjd.saveQuestionJudge(name);
+				int rows = qjd.saveQuestionJudge(name,answer,score);
 				if(rows == 1) {
 					result = "ok";
 				}
@@ -64,6 +64,18 @@ public class QuestionJudgeServiceImpl implements QuestionJudgeService{
 		}
 		return list;
 	}
+	//编辑判断题
+	@Override
+	public boolean editQuestionJudgeByid(int id,String title, String answer, double score) {
+		boolean flag = false;
+		try {
+			qjd.editQuestionJudgeById(id,title,answer,score);
+			flag = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
 
 	//通过id删除判断题
 	@Override
@@ -80,12 +92,6 @@ public class QuestionJudgeServiceImpl implements QuestionJudgeService{
 		return result;
 	}
 
-	//编辑判断题
-	public boolean editQuestionJudgeByid(String title, String answer, String score) {
-		boolean flag = true;
-		return flag;
-	}
-
 
 	//获取所有
 	@Override
@@ -98,5 +104,19 @@ public class QuestionJudgeServiceImpl implements QuestionJudgeService{
 		}
 		return list;
 	}
+
+
+	@Override
+	public List<QuestionJudge> getQuestionJudgeById(int questionId) {
+		List<QuestionJudge> list = null;
+		try {
+			list = qjd.getQuestionJudgeById(questionId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
 
 }

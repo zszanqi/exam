@@ -14,7 +14,7 @@ import com.hs.service.Impl.PaperServiceImpl;
 import com.hs.util.Page;
 
 /**
- * 提交改变页面状态
+ * 提交改变页面状态,试卷出完时改变试卷状态
  */
 @WebServlet("/teacher/CommitServlet")
 public class CommitServlet extends HttpServlet {
@@ -25,7 +25,6 @@ public class CommitServlet extends HttpServlet {
      */
     public CommitServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

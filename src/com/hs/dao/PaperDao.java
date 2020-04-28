@@ -31,4 +31,8 @@ public interface PaperDao {
 
 	public int commitPaper(int paperId) throws SQLException;
 
+	public List<Exam> getTeacherByid(int paperId) throws SQLException;
+
+	public int editPaper(int paperId, String title, String time) throws SQLException;
+
 }

@@ -10,8 +10,11 @@ public interface QuestionJudgeDao {
 	public abstract List<QuestionJudge> getQuestionJudgesByName(String name,Page page,Integer curPage) throws SQLException ;
 	public abstract int getQuestionJudgesCount(String name) throws SQLException;
 	public abstract int deleteQuestionJudgeById(String id) throws SQLException;
-	public abstract int saveQuestionJudge(String name) throws SQLException;
+	public abstract int saveQuestionJudge(String name,String answer,Double score) throws SQLException;
 	public abstract QuestionJudge queryByName(String name) throws SQLException;
 	public abstract List<QuestionJudge> getQuestionJudgeList() throws SQLException;
 	public abstract List<QuestionJudge> getJudgeAll(String title) throws SQLException;
+	public abstract void editQuestionJudgeById(int id, String title, String answer, double score) throws SQLException;
+	public abstract List<QuestionJudge> getQuestionJudgeById(int questionId) throws SQLException;
+
 }

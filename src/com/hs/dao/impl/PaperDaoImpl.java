@@ -6,11 +6,14 @@ import java.util.Map;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.apache.commons.lang.StringUtils;
 
 import com.hs.dao.PaperDao;
+import com.hs.model.Exam;
+import com.hs.model.Teacher;
 import com.hs.util.C3P0Utils;
 import com.hs.util.Page;
 
@@ -120,6 +123,19 @@ public class PaperDaoImpl implements PaperDao {
 	@Override
 	public int commitPaper(int paperId) throws SQLException {
 		String sql = "update exam set fk_status=2 where id="+paperId;
+		return qr.update(sql);
+	}
+
+	@Override
+	public List<Exam> getTeacherByid(int paperId) throws SQLException {
+		String sql="select * from exam where id='"+paperId+"'";
+		return qr.query(sql,new BeanListHandler<Exam>(Exam.class));
+	}
+
+	@Override
+	public int editPaper(int paperId, String title, String time) throws SQLException {
+		String sql = "update exam set title='"+title+"' , time_limit='"+time+"' "
+				+ " where id="+paperId;
 		return qr.update(sql);
 	}
 

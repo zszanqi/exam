@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/base.jsp" %>
-<!DOCTYPE html>
+
 <html lang="en">
   <head>
     <title>判断题修改</title>
@@ -17,11 +17,11 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-edit"></i>判断题修改</h1>
+          <h1><i class="fa fa-edit"></i> 判断题修改</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item">判断题管理</li>
+          <li class="breadcrumb-item">判断题修改</li>
           <li class="breadcrumb-item"><a href="#">修改</a></li>
         </ul>
       </div>
@@ -30,16 +30,14 @@
           <div class="tile">
             <div class="row">
               <div class="col-lg-6">
-              <form action="${basePath }DoQuestionJudgeEditServlet" method="post" id="editquestion_judgeForm">
-              <input type="hidden" name="id" value="${question_judge.id }">
-                  <div class="form-group">
-                    <label for="name">判断题题目</label>
-                    <input class="form-control" id="title" name="title" type="text" value="${question_judge.title}" placeholder="请输入判断题题目">
-                    <label for="name">判断题答案</label>
-                    <input class="form-control" id="answer" name="answer" type="text" value="${question_judge.answer}" placeholder="请输入判断题答案">
-                    <label for="name">判断题分数</label>
-                    <input class="form-control" id="score" name="score" type="text" value="${question_judge.score}" placeholder="请输入判断题分数">
-                  </div>
+              <form action="${basePath }DoPaperEditServlet" method="post" id="editteacherForm">
+              <input type="hidden" name="id" id="quesId" value="${quesId}">
+                  <label for="name">题目名称</label>
+                    <input class="form-control" id="title" name="name" type="text" value="${questionjudge.title }" placeholder="请输入题目名称">
+                    <label for="name">答案</label>
+                    <input class="form-control" id="answer" name="username" type="text" value="${questionjudge.answer }" placeholder="请输入答案">
+                    <label for="name">分值</label>
+                    <input class="form-control" id="score" name="name" type="text" value="${questionjudge.score }" placeholder="请输入分值">
                 </form>
               </div>
             </div>
@@ -58,12 +56,12 @@
     <!-- The javascript plugin to display page loading on top-->
     <script type="text/javascript">
     function toSubmit(){
- 		var title = $("#title").val();
+ 		var title=$("#title").val();
  		var answer=$("#answer").val();
- 		var score=$("#score").val();
- 		
+ 		var score = $('#score').val();
+ 		var id=$("#quesId").val();
  		if(title==null || title==''){
- 			alert("题目不能为空");
+ 			alert("新标题不能为空");
  			$("#title").focus();
  			return false;
  		}
@@ -73,19 +71,19 @@
  			return false;
  		}
  		if(score==null || score==''){
- 			alert("分数不能为空");
+ 			alert("分值不能为空");
  			$("#score").focus();
  			return false;
  		}
  		//发送ajax请求
  		$.ajax({
- 			url:'${basePath}DoQuestionJudgeEditServlet',
+ 			url:'${basePath}teacher/DoQuestionJudgeEditServlet',
  			type:'post',
- 			data:$("#editquestion_judgeForm").serialize(),
+ 			data:{'title':title,'answer':answer,"score":score,'id':id},
  			dataType:'text',
  			success:function(data){
  				if(data=='ok'){
- 					window.location.href='${basePath}manager/QuestionJudgeServlet';
+ 					window.location.href='${basePath}teacher/QuestionJudgeServlet';
  				}else{
  					alert("系统异常，请稍后再试");
  				}

@@ -30,7 +30,9 @@ public class DeleteClazzServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//获取请求参数
 		String id = request.getParameter("clazzId");
+		//调用service层方法
 		ClazzService cs = new ClazzServiceImpl();
 		String result = cs.deleteClazzById(id);
 		response.getWriter().write(result);

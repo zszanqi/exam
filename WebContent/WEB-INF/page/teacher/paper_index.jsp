@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/base.jsp"%>
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <title>试卷管理</title>
@@ -108,7 +108,7 @@
 								<td>
 									<button class="btn btn-danger my_del" type="button"
 										onclick="deletePaper('${paper.id }')">删除</button>
-									<button class="btn btn-success my_del" type="button" onclick="">编辑</button>
+									<button class="btn btn-success my_del" type="button" onclick="toEdit(${paper.id})">编辑</button>
 									<button class="btn btn-info my_del" type="button"
 										onclick="toAppend('${paper.id }')">试题</button>
 								</td>
@@ -189,6 +189,9 @@
 		function toClazzList(paperId){
 	    	  window.location.href='${basePath}teacher/ChoosePaperClazzServlet?flag=1&paperId='+paperId;
 	      }
+		function toEdit(paperId){
+			window.location.href='${basePath}teacher/ToEditPaperServlet?paperId='+paperId;
+		}
 	</script>
 </body>
 </html>

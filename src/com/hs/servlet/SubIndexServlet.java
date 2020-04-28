@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 跳转到管理员首页
+ * 跳转到子页面
  */
 @WebServlet("/SubIndexServlet")
 public class SubIndexServlet extends HttpServlet {

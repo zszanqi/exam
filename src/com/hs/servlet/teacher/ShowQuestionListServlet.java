@@ -24,8 +24,10 @@ public class ShowQuestionListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//获取请求参数
 		String paperId = request.getParameter("paperId");
 		List<Map<String,Object>> list = null;
+		//调用service层方法
 		PaperService ps = new PaperServiceImpl();
 		list = ps.ShowQuestionList(paperId);
 		request.setAttribute("list", list);

@@ -4,7 +4,7 @@
 
 <html lang="en">
   <head>
-    <title>教师密码修改</title>
+    <title>试卷修改</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,11 +17,11 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-edit"></i> 教师密码修改</h1>
+          <h1><i class="fa fa-edit"></i> 试卷修改</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item">教师密码修改</li>
+          <li class="breadcrumb-item">试卷修改</li>
           <li class="breadcrumb-item"><a href="#">修改</a></li>
         </ul>
       </div>
@@ -30,12 +30,12 @@
           <div class="tile">
             <div class="row">
               <div class="col-lg-6">
-              <form action="${basePath }DoTeacherEditServlet" method="post" id="editteacherForm">
-              <input type="hidden" name="id" value="${editid}">
-                  <div class="form-group">
-                    <label for="name">教师新密码</label>
-                    <input class="form-control" id="newps" name="newps" type="text" value="${teacher.realname}" placeholder="请输入教师新密码">
-                  </div>
+              <form action="${basePath }DoPaperEditServlet" method="post" id="editteacherForm">
+              <input type="hidden" name="id" id="paperId" value="${paperId}">
+                  <label for="name">试卷名称</label>
+                    <input class="form-control" id="title" name="name" type="text" value="${paper.title}" placeholder="请输入试卷名称">
+                    <label for="name">考试时长</label>
+                    <input class="form-control" id="time" name="username" type="text" value="${paper.time_limit}" placeholder="请输入考试时长">
                 </form>
               </div>
             </div>
@@ -54,22 +54,28 @@
     <!-- The javascript plugin to display page loading on top-->
     <script type="text/javascript">
     function toSubmit(){
- 		var newps=$("#newps").val();
- 		var editid=$("#editid").val();
- 		if(newps==null || newps==''){
- 			alert("教师密码不能为空");
- 			$("#newps").focus();
+ 		var title=$("#title").val();
+ 		var time=$("#time").val();
+ 		var paperId=$("#paperId").val();
+ 		if(title==null || title==''){
+ 			alert("新标题不能为空");
+ 			$("#title").focus();
+ 			return false;
+ 		}
+ 		if(time==null || time==''){
+ 			alert("考试时间不能为空");
+ 			$("#time").focus();
  			return false;
  		}
  		//发送ajax请求
  		$.ajax({
- 			url:'${basePath}DoTeacherEditpsServlet',
+ 			url:'${basePath}teacher/DoPaperEditServlet',
  			type:'post',
- 			data:{'newps':newps,'editid':editid},
+ 			data:{'title':title,'time':time,'paperId':paperId},
  			dataType:'text',
  			success:function(data){
  				if(data=='ok'){
- 					window.location.href='${basePath}manager/TeacherServlet';
+ 					window.location.href='${basePath}teacher/PaperServlet';
  				}else{
  					alert("系统异常，请稍后再试");
  				}

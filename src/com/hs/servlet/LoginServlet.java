@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginServlet
+ * 跳转到登录页面
  */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -19,13 +19,13 @@ public class LoginServlet extends HttpServlet {
      */
     public LoginServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//转发到登录页面
 		request.getRequestDispatcher("/WEB-INF/page/login.jsp").forward(request, response);
 	}
 

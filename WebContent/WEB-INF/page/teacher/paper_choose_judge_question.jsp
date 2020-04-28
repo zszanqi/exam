@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/base.jsp"%>
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <title>首页</title>
@@ -23,7 +23,7 @@
 			width:110%;
 		}
 		#addbtn{
-			margin-top:-120px;
+			margin-top:-85px;
 			margin-left:10%;
 		}
 	</style>
@@ -32,8 +32,7 @@
 
 	<!-- 页面主体 -->
 	<main class="app-content">
-	<button class="btn btn-primary" type="button" id="addbtn"
-								onclick="toSubmit()">
+	<button class="btn btn-primary" type="button" id="addbtn" onclick="toSubmit()">
 								<i class="fa fa-fw fa-lg fa-plus-circle"></i>添加
 							</button>
 		<table class="table table-hover" id="datatable">
@@ -41,7 +40,7 @@
 				
 						<tr>
 							<th>
-							 <input type="checkbox">全选
+							 
 							</th>
 							<th>序号</th>
 							<th>标题</th>

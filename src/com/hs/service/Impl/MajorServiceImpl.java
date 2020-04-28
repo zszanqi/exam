@@ -11,21 +11,82 @@ import com.hs.service.MajorService;
 import com.hs.util.Page;
 
 public class MajorServiceImpl implements MajorService{
-
-	MajorDao md = new MajorDaoImpl();
+	
+	private MajorDao md = new MajorDaoImpl();
+	
+	//查询所有专业列表
 	@Override
-	public Page<Major> GetMajorByName(String name,Page page,Integer curPage){
+	public List<Major> getMajorList() {
 		List<Major> list = null;
-		int rowsCount = 0;
 		try {
-			list = md.GetMajorByName(name, page, curPage);
-			rowsCount = md.GetMajorCount(name);
-		} catch (SQLException e) {
+			list = md.getMajorList();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		page.setParam(list,curPage, rowsCount);
+		return list;
+	}
+   /*
+    * 根据年纪名称查询列表
+    * @see com.hs.service.MajorService#getGradesByName(java.lang.String)
+    */
+
+	@Override
+	public Page<Major> getMajorsByName(String name, Page page, Integer curPage) {
+		try{
+			//查询当前页面要显示的记录列表
+			List<Major> list=md.getMajorsByName(name, page, curPage);
+			//查询总记录数
+			int rowsCount=md.getMajorsCount(name);
+			//将查询结果封装到page对象中
+			page.setParam(list, curPage, rowsCount);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return page;
 	}
+    /*
+     *保存专业信息 
+     * @see com.hs.service.MajorService#saveGrade(java.lang.String)
+     */
+	@Override
+	public String saveGrade(String name) {
+		String result = null;
+		//1.判断该年纪名称是否已经被添加
+		try{
+			Major major=md.queryByName(name);
+			if(major!=null){
+				//已存在
+				result="exist";
+			}else{
+				//不存在
+				int rows=md.saveMajor(name);
+				if(rows==1){
+					result="ok";
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
+	/**
+	 * 删除操作  
+	 */
+	@Override
+	public String delMajor(int majorId) {
+		String result = null;
+		try {
+			int rows = md.delMajor(majorId);
+			if(rows==1){
+				result="ok";
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	
 	public List<Major> GetAllMajor(){
 		List<Major> list = null;
@@ -56,4 +117,9 @@ public class MajorServiceImpl implements MajorService{
 		}
 		return result;
 	}
+	
 }
+	
+
+	
+

@@ -13,7 +13,7 @@ import com.hs.service.Impl.LoginServiceImpl;
 import com.hs.util.MD5Util;
 
 /**
- * Servlet implementation class DoLoginServlet
+ * 登录功能servlet
  */
 @WebServlet("/DoLoginServlet")
 public class DoLoginServlet extends HttpServlet {
@@ -37,15 +37,17 @@ public class DoLoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String roleId = request.getParameter("role");
 		String auto = request.getParameter("auto");
-		
+		//调用service层方法
 		LoginService ls = new LoginServiceImpl();
 		String result = ls.Login(Integer.parseInt(roleId), username, password, request);
 		if("true".equals(auto)) {
+			//自动登陆
 			String info = username+"<>"+password+"<>"+roleId;
 			Cookie cookie = new Cookie("exam_userinfo",info);
 			cookie.setMaxAge(30*24*60*60);
 			response.addCookie(cookie);
 		}else {
+			//取消自动登录
 			Cookie[] cookies = request.getCookies();
 			for(Cookie cookie : cookies) {
 				if(cookie.getName().equals("exam_userinfo")) {

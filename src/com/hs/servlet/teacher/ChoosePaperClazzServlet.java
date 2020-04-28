@@ -42,7 +42,6 @@ public class ChoosePaperClazzServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String flag = request.getParameter("flag");
 		if("1".equals(flag)) {
-			
 			//获取参数
 			String gradeName = request.getParameter("gradeName");
 			String majorName = request.getParameter("majorName");
@@ -89,7 +88,6 @@ public class ChoosePaperClazzServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -11,7 +11,7 @@ import com.hs.service.PaperClazzService;
 import com.hs.service.Impl.PaperClazzServiceImpl;
 
 /**
- * 保存exam的id
+ * 保存exam的clazz
  */
 @WebServlet("/manager/SelectPaperClazzServlet")
 public class SelectPaperClazzServlet extends HttpServlet {

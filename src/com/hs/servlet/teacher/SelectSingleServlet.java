@@ -11,7 +11,7 @@ import com.hs.service.PaperService;
 import com.hs.service.Impl.PaperServiceImpl;
 
 /**
- * Servlet implementation class SelectSingleServlet
+ * 保存单选题到exam_question表中
  */
 @WebServlet("/teacher/SelectSingleServlet")
 public class SelectSingleServlet extends HttpServlet {

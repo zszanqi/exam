@@ -31,11 +31,11 @@ public class ToQuestionJudgeEditServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name=request.getParameter("name");
+		String id=request.getParameter("id");
 		QuestionJudgeService questionjudge = new QuestionJudgeServiceImpl();
-		List<QuestionJudge> qj= questionjudge.getQuestionJudgeList();
-		System.out.println(qj);
+		List<QuestionJudge> qj= questionjudge.getQuestionJudgeById(Integer.parseInt(id));
 		request.setAttribute("questionjudge", qj.get(0));
+		request.setAttribute("quesId", id);
 		request.getRequestDispatcher("/WEB-INF/page/teacher/question_judge_edit.jsp").forward(request, response);
 	}
 

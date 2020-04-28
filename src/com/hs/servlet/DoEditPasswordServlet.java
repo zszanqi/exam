@@ -21,6 +21,7 @@ public class DoEditPasswordServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//调用service层方法
 		LoginService ls = new LoginServiceImpl();
 		String result = ls.updatePassword(request);
 		response.getWriter().write(result);

@@ -21,10 +21,12 @@ public class DeletePaperServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//获取请求参数
 		String paperId = request.getParameter("id");
 		//创建service对象
 		PaperService ps = new PaperServiceImpl();
 		String result = ps.deletePaperById(Integer.parseInt(paperId));
+		//回传参数
 		response.getWriter().write(result);
 	}
 

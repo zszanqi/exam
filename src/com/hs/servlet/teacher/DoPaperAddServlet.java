@@ -25,6 +25,7 @@ public class DoPaperAddServlet extends HttpServlet {
 		String title = request.getParameter("papertitle");
 		String time = request.getParameter("time");
 		String teacherId = request.getParameter("teacherId");
+		//调用service方法
 		PaperService ps = new PaperServiceImpl();
 		String result = ps.addPaperByTitleAndTime(title,time,Integer.parseInt(teacherId));
 		response.getWriter().write(result);

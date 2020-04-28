@@ -31,6 +31,7 @@ public class PaperMultiServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		//获取请求参数
 		String title = request.getParameter("title");
 		String paperId = request.getParameter("paperId");
 		List<QuestionMulti> list = null;
@@ -48,7 +49,6 @@ public class PaperMultiServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

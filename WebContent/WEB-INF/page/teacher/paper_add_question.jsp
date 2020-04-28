@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/base.jsp"%>
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <title>试卷管理</title>
@@ -43,7 +43,7 @@
 					<form class="row" method="post"
 						action="${basePath }teacher/PaperQuestionServlet">
 						<div class="form-group col-md-4 align-self-end">
-							 <input class="form-control" name="name" id="questionName" type="text" placeholder="请输入题目名称">
+							 <input class="form-control" name="name" id="questionName" type="hidden" placeholder="请输入题目名称">
 							<button class="btn btn-primary" type="button"
 								onclick="changeListSingle()">
 								<i class="fa fa-fw fa-lg fa-check-circle"></i>单选题

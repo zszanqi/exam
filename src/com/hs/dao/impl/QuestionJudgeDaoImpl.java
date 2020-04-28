@@ -22,7 +22,7 @@ public class QuestionJudgeDaoImpl implements QuestionJudgeDao{
 	public List<QuestionJudge> getQuestionJudgesByName(String name,Page page,Integer curPage) throws SQLException {
 		String sql  = "select * from question_judge where del_flag=0 ";
 		if(StringUtils.isNotBlank(name)) {
-			sql +=" and name like '%"+name+"%'";
+			sql +=" and title like '%"+name+"%'";
 			page.appendParam("name", name);
 		}
 		sql += " order by id desc limit "+(curPage-1)*page.getPageSize()+","+page.getPageSize();
@@ -47,18 +47,18 @@ public class QuestionJudgeDaoImpl implements QuestionJudgeDao{
 	}
 
 	//保存判断题对象
-	public int saveQuestionJudge(String name) throws SQLException {
-		String sql = "insert into question_judge(name) values('"+name+"')";
+	public int saveQuestionJudge(String name,String answer,Double score) throws SQLException {
+		String sql = "insert into question_judge(title,answer,score) values('"+name+"','"+answer+"',"+score+")";
 		return qr.update(sql);
 	}
 
 	//通过姓名查找
 	public QuestionJudge queryByName(String name) throws SQLException {
-		String sql = "select * from question_judge where del_flag=0 and name='"+name+"'";
+		String sql = "select * from question_judge where del_flag=0 and title='"+name+"'";
 		return qr.query(sql, new BeanHandler<QuestionJudge>(QuestionJudge.class));
 	}
 
-	//鑾峰彇骞寸骇鍒楄〃锛岀敤浜庝笅鎷夋灞曠ず
+	//获取判断题列表
 	public List<QuestionJudge> getQuestionJudgeList() throws SQLException {
 		String sql = "select * from question_judge where del_flag=0 order by id desc";
 		return qr.query(sql, new BeanListHandler<QuestionJudge>(QuestionJudge.class));
@@ -72,6 +72,19 @@ public class QuestionJudgeDaoImpl implements QuestionJudgeDao{
 			sql +=" and title like'%"+title+"%'";
 		}
 		sql +=" order by id desc ";
+		return qr.query(sql,new BeanListHandler<QuestionJudge>(QuestionJudge.class));
+	}
+
+	@Override
+	public void editQuestionJudgeById(int id, String title, String answer, double score) throws SQLException {
+		String sql = "update question_judge set title='"+title+"' , answer='"+answer+"' , score="+score 
+				+ " where id="+id;
+		qr.update(sql);
+	}
+
+	@Override
+	public List<QuestionJudge> getQuestionJudgeById(int questionId) throws SQLException{
+		String sql = "select * from question_judge where id="+questionId;
 		return qr.query(sql,new BeanListHandler<QuestionJudge>(QuestionJudge.class));
 	}
 }

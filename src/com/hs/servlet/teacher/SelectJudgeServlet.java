@@ -11,7 +11,7 @@ import com.hs.service.PaperService;
 import com.hs.service.Impl.PaperServiceImpl;
 
 /**
- * 展示判断题
+ * 保存所选判断题
  */
 @WebServlet("/teacher/SelectJudgeServlet")
 public class SelectJudgeServlet extends HttpServlet {
@@ -38,7 +38,6 @@ public class SelectJudgeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

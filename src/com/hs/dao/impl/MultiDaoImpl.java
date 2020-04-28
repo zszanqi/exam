@@ -63,7 +63,6 @@ public class MultiDaoImpl implements MultiDao {
 		}else{
 			return "exist";
 		}
-		
 	}
 	
 	/**

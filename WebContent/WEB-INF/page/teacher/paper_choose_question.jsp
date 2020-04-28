@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/base.jsp"%>
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <title>首页</title>
@@ -23,7 +23,7 @@
 			width:110%;
 		}
 		#addbtn{
-			margin-top:-120px;
+			margin-top:-85px;
 			margin-left:10%;
 		}
 	</style>
@@ -41,7 +41,7 @@
 				
 						<tr>
 							<th>
-							 <input type="checkbox">全选
+							 
 							</th>
 							<th>序号</th>
 							<th>标题</th>
@@ -86,7 +86,6 @@ function toSubmit(){
 			}
 		}
 	});
-	
 }
 </script>
 </html>

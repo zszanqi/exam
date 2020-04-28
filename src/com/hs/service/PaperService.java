@@ -3,6 +3,7 @@ package com.hs.service;
 import java.util.List;
 import java.util.Map;
 
+import com.hs.model.Exam;
 import com.hs.util.Page;
 
 public interface PaperService {
@@ -26,5 +27,9 @@ public interface PaperService {
 	String saveJudgeByPaperId(int paperId, String[] questionIds);
 
 	String commitPaper(int paperId);
+
+	List<Exam> getPaperById(int paperId);
+
+	String editPaper(int parseInt, String title, String time);
 
 }
